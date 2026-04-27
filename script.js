@@ -6,9 +6,24 @@ document.addEventListener('DOMContentLoaded', () => {
     const taskCount = document.getElementById('task-count');
     const filterBtns = document.querySelectorAll('.filter-btn');
     const clearCompletedBtn = document.getElementById('clear-completed');
+    const themeToggleBtn = document.getElementById('theme-toggle');
 
     let tasks = JSON.parse(localStorage.getItem('nextasks')) || [];
     let currentFilter = 'all';
+
+    // Theme setup
+    let isDarkMode = localStorage.getItem('darkMode') === 'true';
+    if (isDarkMode) {
+        document.body.classList.add('dark-mode');
+        themeToggleBtn.innerHTML = '<i class="fas fa-sun"></i>';
+    }
+    
+    themeToggleBtn.addEventListener('click', () => {
+        isDarkMode = !isDarkMode;
+        document.body.classList.toggle('dark-mode', isDarkMode);
+        localStorage.setItem('darkMode', isDarkMode);
+        themeToggleBtn.innerHTML = isDarkMode ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+    });
 
     function saveTasks() {
         localStorage.setItem('nextasks', JSON.stringify(tasks));
