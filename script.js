@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
         taskList.innerHTML = '';
         
         let filteredTasks = tasks;
-        if (currentFilter === 'active') {
+        if (currentFilter === 'active' || currentFilter === 'pending') {
             filteredTasks = tasks.filter(task => !task.completed);
         } else if (currentFilter === 'completed') {
             filteredTasks = tasks.filter(task => task.completed);
